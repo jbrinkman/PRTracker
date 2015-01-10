@@ -16,13 +16,20 @@ namespace GitHubPullRequests.Models
 
     public class Repository
     {
+        public Repository()
+        {
+            Notifications = new List<Notification>();
+            RepositoryHistories = new List<RepositoryHistory>();
+            PullRequests = new List<PullRequest>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
 
-        public virtual List<Notification> Notifications { get; private set; } = new List<Notification>();
-        public virtual List<RepositoryHistory> RepositoryHistories { get; private set; } = new List<RepositoryHistory>();
-        public virtual List<PullRequest> PullRequests { get; private set; } = new List<PullRequest>();
+        public virtual List<Notification> Notifications { get; private set; } 
+        public virtual List<RepositoryHistory> RepositoryHistories { get; private set; }
+        public virtual List<PullRequest> PullRequests { get; private set; }
     }
 
     public class RepositoryHistory
