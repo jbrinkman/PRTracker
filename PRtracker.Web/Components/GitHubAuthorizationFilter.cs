@@ -44,7 +44,7 @@ namespace PRTracker.Web.Components
         public GitHubAuthorizationFilter(string secret, bool active)
         {
             Secret = secret;
-            Active = active;
+            Active = !string.IsNullOrEmpty(secret) && active;
         }
 
         /// <summary>
@@ -81,13 +81,20 @@ namespace PRTracker.Web.Components
         private string CreateToken(string message, string secret)
         {
             secret = secret ?? "";
-            byte[] keyByte = Encoding.ASCII.GetBytes(secret);
-            byte[] messageBytes = Encoding.ASCII.GetBytes(message);
+            var keyByte = Encoding.ASCII.GetBytes(secret);
+            var messageBytes = Encoding.ASCII.GetBytes(message);
             using (var hmacsha1 = new HMACSHA1(keyByte))
             {
-                byte[] hashmessage = hmacsha1.ComputeHash(messageBytes);
+                var hashmessage = hmacsha1.ComputeHash(messageBytes);
                 return BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
             }
+        }
+
+        private static byte[] GetBytes(string str)
+        {
+            var bytes = new byte[str.Length * sizeof(char)];
+            Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            return bytes;
         }
     }
 }
