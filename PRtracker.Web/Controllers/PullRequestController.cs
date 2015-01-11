@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
-using GitHubPullRequests.Components;
-using GitHubPullRequests.Data;
-using GitHubPullRequests.Models;
-using GitHubPullRequests.ViewModels;
-using PullRequest = GitHubPullRequests.Models.PullRequest;
-using User = GitHubPullRequests.Models.User;
+using PRTracker.Web.Components;
+using PRTracker.Web.Data;
+using PRTracker.Web.Models;
+using PRTracker.Web.ViewModels;
+using PullRequest = PRTracker.Web.Models.PullRequest;
+using User = PRTracker.Web.Models.User;
 
-namespace GitHubPullRequests.Controllers
+namespace PRTracker.Web.Controllers
 {
     public class PullRequestController : ApiController
     {
@@ -48,7 +47,8 @@ namespace GitHubPullRequests.Controllers
                 RawJson = body,
                 ReceivedDate = DateTime.UtcNow,
                 Repository = repo,
-                RepositoryId = repo.Id
+                RepositoryId = repo.Id,
+                Processed = true
             };
 
             db.Notifications.Add(notification);

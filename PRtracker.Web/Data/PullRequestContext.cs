@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using GitHubPullRequests.Models;
+using PRTracker.Web.Models;
 
-namespace GitHubPullRequests.Data
+namespace PRTracker.Web.Data
 {
     public class PullRequestContext : DbContext
     {

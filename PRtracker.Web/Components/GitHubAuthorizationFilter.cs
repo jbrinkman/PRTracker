@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Web;
-using System.Net.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Filters;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Http.Controllers;
+using System.Web.Http.Filters;
+using log4net;
 
-namespace GitHubPullRequests.Components
+namespace PRTracker.Web.Components
 {
     /// <summary>
     /// Authorization filter to check that the GitHub provided signature is valid for the specified content.
@@ -64,6 +63,9 @@ namespace GitHubPullRequests.Components
                     var body = await actionContext.Request.Content.ReadAsStringAsync();
 
                     var token = CreateToken(body, Secret);
+
+                    var log = LogManager.GetLogger("PRTracker");
+                    log.InfoFormat("Signature: {0}, Token: {1}", signature, token);
 
                     if (token == signature)
                     {

@@ -1,18 +1,16 @@
-namespace GitHubPullRequests.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+using System.Data.Entity.Migrations;
+using PRTracker.Web.Data;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<GitHubPullRequests.Data.PullRequestContext>
+namespace PRTracker.Web.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<PullRequestContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(GitHubPullRequests.Data.PullRequestContext context)
+        protected override void Seed(PullRequestContext context)
         {
             //  This method will be called after migrating to the latest version.
 

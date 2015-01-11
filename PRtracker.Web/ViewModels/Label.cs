@@ -1,4 +1,4 @@
-﻿namespace GitHubPullRequests.ViewModels
+﻿namespace PRTracker.Web.ViewModels
 {
     public class Label
     {
