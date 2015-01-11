@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Http;
+using log4net;
 using PRTracker.Web.Components;
 using PRTracker.Web.Data;
 using PRTracker.Web.Models;
@@ -28,15 +29,25 @@ namespace PRTracker.Web.Controllers
         [GitHubAuthorizationFilter]
         public async void Post([FromBody]ViewModels.WebHook_PR pr)
         {
-            var body = await this.ActionContext.Request.Content.ReadAsStringAsync();
-
-            using (var db = new PullRequestContext())
+            try
             {
-                var creator = GetUser(db, pr.pull_request.user);
-                var repo = GetRepo(db, pr.repository);
+                var body = await this.ActionContext.Request.Content.ReadAsStringAsync();
 
-                SavePullRequest(db, pr.pull_request, repo, creator);
-                SaveNotification(db, repo, body);
+                using (var db = new PullRequestContext())
+                {
+                    var creator = GetUser(db, pr.pull_request.user);
+                    var repo = GetRepo(db, pr.repository);
+
+                    SavePullRequest(db, pr.pull_request, repo, creator);
+                    SaveNotification(db, repo, body);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                var log = LogManager.GetLogger("PRTracker");
+                log.Error(exception);
+                throw;
             }
         }
 
