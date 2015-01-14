@@ -115,6 +115,10 @@
     <Compile Include="Migrations\201501102253130_ProcessedFlag.Designer.cs">
       <DependentUpon>201501102253130_ProcessedFlag.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501140310326_PullRequestDates.cs" />
+    <Compile Include="Migrations\201501140310326_PullRequestDates.Designer.cs">
+      <DependentUpon>201501140310326_PullRequestDates.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PullRequest.cs" />
     <Compile Include="Models\Repository.cs" />
@@ -151,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501102253130_ProcessedFlag.resx">
       <DependentUpon>201501102253130_ProcessedFlag.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501140310326_PullRequestDates.resx">
+      <DependentUpon>201501140310326_PullRequestDates.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

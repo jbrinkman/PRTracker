@@ -70,17 +70,33 @@ namespace PRTracker.Web.Controllers
         private static void SavePullRequest(PullRequestContext db, ViewModels.PullRequest pullRequest, Repository repo, User creator)
         {
             var pr = db.PullRequests.Find(pullRequest.id);
-            if (pr != null) return ;
-
-            pr = new PullRequest
+            if (pr != null)
             {
-                Id = pullRequest.id,
-                Repository = repo,
-                RepositoryId = repo.Id,
-                CreatedByUser = creator,
-                Number = pullRequest.number
-            };
-            db.PullRequests.Add(pr);
+                if (pr.CreatedDate == null)
+                {
+                    pr.CreatedDate = pullRequest.created_at;
+                    pr.CreatedByUserId = creator.Id;
+                    pr.CreatedByUser = creator;
+                }
+                if (pr.ClosedDate == null && pullRequest.closed_at != null)
+                {
+                    pr.Closed = true;
+                    pr.ClosedDate = pullRequest.closed_at;
+                }
+            }
+            else
+            {
+                pr = new PullRequest
+                {
+                    Id = pullRequest.id,
+                    Repository = repo,
+                    RepositoryId = repo.Id,
+                    CreatedByUser = creator,
+                    CreatedDate = pullRequest.created_at,
+                    Number = pullRequest.number
+                };
+                db.PullRequests.Add(pr);
+            }
             db.SaveChanges();
         }
 

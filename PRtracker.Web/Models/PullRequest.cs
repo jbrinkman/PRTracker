@@ -6,6 +6,7 @@ namespace PRTracker.Web.Models
     {
         public int Id { get; set; }
         public int RepositoryId { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public int? CreatedByUserId { get; set; }
         public int Number { get; set; }
         public bool Closed { get; set; }
