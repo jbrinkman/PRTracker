@@ -27,7 +27,7 @@ namespace PRTracker.Web.Controllers
         }
 
         // POST: api/PullRequest
-        [GitHubAuthorizationFilter]
+        //[GitHubAuthorizationFilter]
         public async void Post([FromBody]ViewModels.WebHook_PR pr)
         {
             try

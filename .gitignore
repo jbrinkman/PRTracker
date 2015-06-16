@@ -100,3 +100,4 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 PRtracker.Web/Logs/
+.vs/
