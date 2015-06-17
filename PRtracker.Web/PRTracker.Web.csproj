@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <NuGetPackageImportStamp>f2c7a675</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/18c47f62-c809-435e-b753-971610dc364d/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/GitHubPullRequests</ApplicationInsightsResourceId>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,7 +102,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Components\JsonExtensionsWeb.cs" />
+    <Compile Include="Components\EmptyTask.cs" />
     <Compile Include="Components\GitHubAuthorizationFilter.cs" />
+    <Compile Include="Components\NakedBodyAttribute.cs" />
+    <Compile Include="Components\NakedBodyParameterBinding.cs" />
     <Compile Include="Controllers\PullRequestController.cs" />
     <Compile Include="Data\PullRequestContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -175,7 +180,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4077</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4077</IISUrl>
+          <IISUrl>http://localhost:4077/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
