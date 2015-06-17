@@ -32,7 +32,7 @@ namespace PRTracker.Web.ViewModels
         public CompareRepo @base { get; set; }
         public Links _links { get; set; }
         public bool merged { get; set; }
-        public bool mergeable { get; set; }
+        public bool? mergeable { get; set; }
         public string mergeable_state { get; set; }
         public User merged_by { get; set; }
         public int comments { get; set; }
