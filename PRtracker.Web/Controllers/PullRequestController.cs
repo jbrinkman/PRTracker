@@ -32,15 +32,22 @@ namespace PRTracker.Web.Controllers
         {
             try
             {
-                //var body = await this.ActionContext.Request.Content.ReadAsStringAsync();
                 var pr = body.FromJson<ViewModels.WebHook_PR>();
 
                 using (var db = new PullRequestContext())
                 {
+                    var sender = GetUser(db, pr.sender);
                     var creator = GetUser(db, pr.pull_request.user);
                     var repo = GetRepo(db, pr.repository);
+                    var pullRequest = pr.pull_request;
 
-                    SavePullRequest(db, pr.pull_request, repo, creator);
+                    if (pr.action == "labeled" && pr.label.name == "merged")
+                    {
+                        pullRequest.merged = true;
+                        pullRequest.merged_at = pullRequest.closed_at;
+                    }
+
+                    SavePullRequest(db, pullRequest, repo, creator, sender);
                     SaveNotification(db, repo, body);
                 }
 
@@ -68,7 +75,7 @@ namespace PRTracker.Web.Controllers
             db.SaveChanges();
         }
 
-        private static void SavePullRequest(PullRequestContext db, ViewModels.PullRequest pullRequest, Repository repo, User creator)
+        private static void SavePullRequest(PullRequestContext db, ViewModels.PullRequest pullRequest, Repository repo, User creator, User sender)
         {
             var pr = db.PullRequests.Find(pullRequest.id);
             if (pr != null)
@@ -84,6 +91,13 @@ namespace PRTracker.Web.Controllers
                     pr.Closed = true;
                     pr.ClosedDate = pullRequest.closed_at;
                 }
+                if (!pr.Merged && pullRequest.merged)
+                {
+                    pr.Merged = pullRequest.merged;
+                    pr.MergedDate = pullRequest.merged_at;
+                    pr.MergedByUser = sender;
+                    pr.MergedByUserId = sender.Id;
+                }
             }
             else
             {
@@ -96,7 +110,14 @@ namespace PRTracker.Web.Controllers
                     CreatedDate = pullRequest.created_at,
                     Number = pullRequest.number
                 };
-                db.PullRequests.Add(pr);
+                if (pullRequest.merged)
+                {
+                    pr.Merged = pullRequest.merged;
+                    pr.MergedDate = pullRequest.merged_at;
+                    pr.MergedByUser = sender;
+                    pr.MergedByUserId = sender.Id;
+                }
+                    db.PullRequests.Add(pr);
             }
             db.SaveChanges();
         }
