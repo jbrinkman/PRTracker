@@ -28,11 +28,11 @@ namespace PRTracker.Web.Controllers
 
         // POST: api/PullRequest
         [GitHubAuthorizationFilter]
-        public async void Post() //[FromBody]ViewModels.WebHook_PR pr)
+        public void Post([NakedBody] string body) //[FromBody]ViewModels.WebHook_PR pr)
         {
             try
             {
-                var body = await this.ActionContext.Request.Content.ReadAsStringAsync();
+                //var body = await this.ActionContext.Request.Content.ReadAsStringAsync();
                 var pr = body.FromJson<ViewModels.WebHook_PR>();
 
                 using (var db = new PullRequestContext())
