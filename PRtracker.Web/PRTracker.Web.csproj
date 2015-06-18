@@ -124,6 +124,14 @@
     <Compile Include="Migrations\201501140310326_PullRequestDates.Designer.cs">
       <DependentUpon>201501140310326_PullRequestDates.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506182155199_UserIsEmployee.cs" />
+    <Compile Include="Migrations\201506182155199_UserIsEmployee.Designer.cs">
+      <DependentUpon>201506182155199_UserIsEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506182204394_Milestone.cs" />
+    <Compile Include="Migrations\201506182204394_Milestone.Designer.cs">
+      <DependentUpon>201506182204394_Milestone.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PullRequest.cs" />
     <Compile Include="Models\Repository.cs" />
@@ -134,6 +142,7 @@
     <Compile Include="ViewModels\Link.cs" />
     <Compile Include="ViewModels\Links.cs" />
     <Compile Include="Models\Notification.cs" />
+    <Compile Include="ViewModels\Milestone.cs" />
     <Compile Include="ViewModels\PullRequest.cs" />
     <Compile Include="ViewModels\Repo.cs" />
     <Compile Include="ViewModels\User.cs" />
@@ -163,6 +172,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501140310326_PullRequestDates.resx">
       <DependentUpon>201501140310326_PullRequestDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506182155199_UserIsEmployee.resx">
+      <DependentUpon>201506182155199_UserIsEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506182204394_Milestone.resx">
+      <DependentUpon>201506182204394_Milestone.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

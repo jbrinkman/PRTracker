@@ -98,6 +98,7 @@ namespace PRTracker.Web.Controllers
                     pr.MergedByUser = sender;
                     pr.MergedByUserId = sender.Id;
                 }
+                pr.Milestone = (pullRequest.milestone == null) ? null : pullRequest.milestone.title;
             }
             else
             {
@@ -108,8 +109,10 @@ namespace PRTracker.Web.Controllers
                     RepositoryId = repo.Id,
                     CreatedByUser = creator,
                     CreatedDate = pullRequest.created_at,
-                    Number = pullRequest.number
+                    Number = pullRequest.number,
+                    Milestone = (pullRequest.milestone == null) ? null : pullRequest.milestone.title
                 };
+                 
                 if (pullRequest.merged)
                 {
                     pr.Merged = pullRequest.merged;
@@ -117,7 +120,7 @@ namespace PRTracker.Web.Controllers
                     pr.MergedByUser = sender;
                     pr.MergedByUserId = sender.Id;
                 }
-                    db.PullRequests.Add(pr);
+                db.PullRequests.Add(pr);
             }
             db.SaveChanges();
         }

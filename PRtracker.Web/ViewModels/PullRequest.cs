@@ -22,7 +22,7 @@ namespace PRTracker.Web.ViewModels
         public DateTime? merged_at { get; set; }
         public string merge_commit_sha { get; set; }
         public User assignee { get; set; }
-        public object milestone { get; set; }
+        public Milestone milestone { get; set; }
         public string commits_url { get; set; }
         public string review_comments_url { get; set; }
         public string review_comment_url { get; set; }

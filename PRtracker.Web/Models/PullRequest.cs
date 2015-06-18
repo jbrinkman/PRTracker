@@ -18,6 +18,7 @@ namespace PRTracker.Web.Models
         public virtual Repository Repository { get; set; }
         public virtual User CreatedByUser { get; set; }
         public virtual User MergedByUser { get; set; }
+        public string Milestone { get; set; }
 
     }
 }
