@@ -132,6 +132,10 @@
     <Compile Include="Migrations\201506182204394_Milestone.Designer.cs">
       <DependentUpon>201506182204394_Milestone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507201356100_Null DnnUserId.cs" />
+    <Compile Include="Migrations\201507201356100_Null DnnUserId.Designer.cs">
+      <DependentUpon>201507201356100_Null DnnUserId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\PullRequest.cs" />
     <Compile Include="Models\Repository.cs" />
@@ -178,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506182204394_Milestone.resx">
       <DependentUpon>201506182204394_Milestone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507201356100_Null DnnUserId.resx">
+      <DependentUpon>201507201356100_Null DnnUserId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
