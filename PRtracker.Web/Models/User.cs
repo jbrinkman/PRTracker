@@ -7,7 +7,7 @@ namespace PRTracker.Web.Models
         public string DnnLogin { get; set; }
         public string Name { get; set; }
         public bool IsEmployee { get; set; }
-        public int DnnUserId { get; set; }
+        public int? DnnUserId { get; set; }
 
     }
 }
