@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Components\EncodingUtilities.cs" />
     <Compile Include="Components\JsonExtensionsWeb.cs" />
     <Compile Include="Components\EmptyTask.cs" />
     <Compile Include="Components\GitHubAuthorizationFilter.cs" />
@@ -141,6 +142,11 @@
     <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\RepositoryHistory.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Properties\CommonResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommonResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CompareRepo.cs" />
     <Compile Include="ViewModels\Label.cs" />
     <Compile Include="ViewModels\Link.cs" />
@@ -185,6 +191,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507201356100_Null DnnUserId.resx">
       <DependentUpon>201507201356100_Null DnnUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\CommonResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

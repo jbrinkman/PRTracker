@@ -60,14 +60,9 @@ namespace PRTracker.Web.Components
                 if (actionContext.Request.Headers.Contains("X-Hub-Signature"))
                 {
                     var signature = actionContext.Request.Headers.GetValues("X-Hub-Signature").FirstOrDefault().Replace("sha1=", "");
-                    var body = await actionContext.Request.Content.ReadAsStringAsync();
+                    var body = await actionContext.Request.Content.ReadAsByteArrayAsync();
 
-                    var token = CreateToken(body, Secret);
-
-                    var log = LogManager.GetLogger("PRTracker");
-                    log.InfoFormat("Signature: {0}, Token: {1}", signature, token);
-
-                    if (token == signature)
+                    if (VerifySignature(body, EncodingUtilities.FromHex(Secret)))
                     {
                         return;
                     }
@@ -78,23 +73,18 @@ namespace PRTracker.Web.Components
             }
         }
 
-        private string CreateToken(string message, string secret)
+        private bool VerifySignature(byte[] message, byte[] secret)
         {
-            secret = secret ?? "";
-            var keyByte = Encoding.ASCII.GetBytes(secret);
-            var messageBytes = Encoding.ASCII.GetBytes(message);
-            using (var hmacsha1 = new HMACSHA1(keyByte))
+            byte[] token;
+            using (var hasher = new HMACSHA1(secret))
             {
-                var hashmessage = hmacsha1.ComputeHash(messageBytes);
-                return BitConverter.ToString(hashmessage).Replace("-", "").ToLower();
+                token = hasher.ComputeHash(message);
             }
-        }
 
-        private static byte[] GetBytes(string str)
-        {
-            var bytes = new byte[str.Length * sizeof(char)];
-            Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
-            return bytes;
+            var log = LogManager.GetLogger("PRTracker");
+            log.InfoFormat("Signature: {0}, Token: {1}", secret, token);
+
+            return (secret == token);
         }
     }
 }
